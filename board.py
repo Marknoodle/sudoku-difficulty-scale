@@ -1,47 +1,25 @@
 import random
 class Board:
-    # style: the kind of game to be played, default is "standard" which is 9x9
-    __init__(style='standard'):
+    # style         -> the kind of game to be played, default is "standard" which is 9x9
+    # block_size    -> the size of each subgrid, used to generate the board
+    # board         -> a 2d list of ints which represent our board
+    #                  to navigate: self.board[1,3] is the first row, third column
+    # subgrids      -> a list of pairs, where the first element is the initial index
+    #                  of a subgrid, and the second is the final. i.e.
+    #                  ((1,3),(1,3)) is the upper left subgrid, ((7,9),(7,9)) is the bottom right 
+    __init__(style='standard', board=None):
         self.style = style
         if style == 'standard':
-            self.block_size = 3 
+            self.block_size = 3
+        if board == None:
+            self.board = [[0] * 3 * self.block_size ] * 3 * self.block_size
+        else:
+            self.board = board
+        self.subgrids = []
+        for x in range(1, (1 + self.block_size) * 3,3):
+            for y in range(1, (1 + self.block_size) * 3,3):
+                self.subgrids = self.subgrids + [((x, x + self.block_size),(y, y + self.block_size))]
 
-
-    # We are going to establish the sudoku board as a dictionary
-    # We will position the row/cols with {number}{letter}
-    # To write to the top left square: board["1A"] = number
-    # Remember that the keys are strings and the values stored are integers
-    letters = [A,B,C,D,E,F,G,H,I]
-    self.board = {}
-    for i in range(1,10):
-        for j in letters:
-            board[f"{i}{j}"] = 0
-    
-    # subgrids -> the representation of each subgrid, numbered (1,2) for the 1st row, 2nd column
-    # for      -> generates a dictionary storing the different grids which we can use to store 
-    #               the remaining list elements
-    # vals     -> the possible values to store in our subgrids, rows, and columns
-    vals = [1,2,3,4,5,6,7,8,9]
-    self.subgrids = []
-    for i in range(1,4):
-        for j in range(1,4):
-            self.subgrids[f"{i}{j}"] = [vals]
-
-
-    self.choices = {}
-    for i in range(1,10):
-        self.choices[f"{i}"] = vals
-    for i in letters:
-        self.choices[f"{i}"] = vals
-
-    
-    # Random puzzle maker -> (no rules just random start and pick numbers from there)
-    def make():
-        if  self.style == 'standard':
-            global_choices = [1,2,3,4,5,6,7,8,9]
-            local_choices = [1,2,3,4,5,6,7,8,9]
-            for square in self.board:
-                self.board[square] = random.choice(local)
 
 
 
