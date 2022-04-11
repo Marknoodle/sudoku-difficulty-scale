@@ -1,4 +1,5 @@
 import random
+from numpy import numpy.transpose
 class Board:
     # style         -> the kind of game to be played, default is "standard" which is 9x9
     # block_size    -> the size of each subgrid, used to generate the board
@@ -19,6 +20,20 @@ class Board:
         for x in range(1, (1 + self.block_size) * 3,3):
             for y in range(1, (1 + self.block_size) * 3,3):
                 self.subgrids = self.subgrids + [((x, x + self.block_size),(y, y + self.block_size))]
+
+    def board_check():
+        for row in self.board:
+            if len(row) > len(set(row)):
+                return False
+        for row in numpy.transpose(self.board):
+            if len(row) > len(set(row)):
+                return False
+        subgrids = [[self.board[x:x+3][y:y+3] for x in range(1,(self.block_size * 3) + 1,3) for y in range(1,(self.block_size * 3) + 1,3)]]
+        for row in subgrids:
+            if len(row) > len(set(row)):
+                return False
+        return True
+                
 
 
 
