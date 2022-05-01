@@ -51,7 +51,7 @@ def possible_vals(board):
 
 
 
-def hidden_single():
+def hidden_single(board, cell):
     '''
     description:    While there are technically multiple valid options
                     there is only one viable solution due to factors
